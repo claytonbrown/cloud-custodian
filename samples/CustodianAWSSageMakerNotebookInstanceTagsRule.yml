@@ -1,0 +1,24 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: 'AWS::SageMaker::NotebookInstance property [Tags] should exist, consider
+  default values of [ [{''Key'': ''app_version'', ''Value'': {''Ref'': ''TagsAppVersion''}},
+  {''Key'': ''compliance'', ''Value'': {''Ref'': ''TagsCompliance''}}, {''Key'': ''confidentiality'',
+  ''Value'': {''Ref'': ''TagsConfidentiality''}}, {''Key'': ''cost_code'', ''Value'':
+  {''Ref'': ''TagsCostCode''}}, {''Key'': ''cost_owner'', ''Value'': {''Ref'': ''TagsOwner''}},
+  {''Key'': ''environment'', ''Value'': {''Ref'': ''TagsEnvironment''}}, {''Key'':
+  ''kms_encryption_key'', ''Value'': {''Ref'': ''TagsKMSKeyArn''}}, {''Key'': ''logging_bucket'',
+  ''Value'': {''Ref'': ''TagsLoggingBucket''}}, {''Key'': ''owner_email'', ''Value'':
+  {''Ref'': ''TagsOwnerEmail''}}] ] '
+filters:
+- {key: Tags, op: not-equal, type: sagemaker, value: 'type:exists'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSSageMakerNotebookInstanceTagsRule
+resource: aws.sagemaker

@@ -1,0 +1,17 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: 'AWS::EC2::VPCPeeringConnection property [VpcId] should exist, consider
+  default values of [ {''Ref'': ''VpcId''} ] '
+filters:
+- {key: VpcId, op: not-equal, type: ec2, value: 'type:exists'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSEC2VPCPeeringConnectionVpcIdRule
+resource: aws.ec2

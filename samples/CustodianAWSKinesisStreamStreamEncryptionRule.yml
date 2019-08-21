@@ -1,0 +1,17 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: AWS::Kinesis::Stream property [StreamEncryption] should exist and be
+  set to 'KMS' with reference to KmsKeyID parameter
+filters:
+- {key: StreamEncryption, op: not-equal, type: kinesis, value: 'type:string:KMS'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSKinesisStreamStreamEncryptionRule
+resource: aws.kinesis

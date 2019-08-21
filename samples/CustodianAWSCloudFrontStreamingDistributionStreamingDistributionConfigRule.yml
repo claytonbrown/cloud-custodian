@@ -1,0 +1,20 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: 'AWS::CloudFront::StreamingDistribution property [StreamingDistributionConfig]
+  should exist, consider default values of [ {''Logging'': {''Bucket'': {''Ref'':
+  ''LoggingDestination''}, ''Enabled'': True, ''Prefix'': {''Fn::Join'': [''/'', [''cloudfront'',
+  {''Ref'': ''AWS::Region''}, {''Ref'': ''AWS::StackName''}, ''{{TODO-resource_name}}'']]}}}
+  ] '
+filters:
+- {key: StreamingDistributionConfig, op: not-equal, type: cloudfront, value: 'type:exists'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSCloudFrontStreamingDistributionStreamingDistributionConfigRule
+resource: aws.cloudfront

@@ -1,0 +1,17 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: 'AWS::WorkSpaces::Workspace property [RootVolumeEncryptionEnabled] should
+  exist, consider default values of [ True ] '
+filters:
+- {key: RootVolumeEncryptionEnabled, op: not-equal, type: workspaces, value: 'type:exists'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSWorkSpacesWorkspaceRootVolumeEncryptionEnabledRule
+resource: aws.workspaces
