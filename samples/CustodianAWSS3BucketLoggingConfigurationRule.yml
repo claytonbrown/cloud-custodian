@@ -3,13 +3,19 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: AWS::S3::Bucket property [LoggingConfiguration] should exist
 filters:
-- {key: LoggingConfiguration, op: not-equal, type: s3, value: 'type:exists'}
+- key: LoggingConfiguration
+  op: not-equal
+  type: s3
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSS3BucketLoggingConfigurationRule

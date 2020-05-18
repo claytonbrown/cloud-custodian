@@ -3,7 +3,9 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::ElasticLoadBalancingV2::TargetGroup property [Tags] should exist,
   consider default values of [ [{''Key'': ''app_version'', ''Value'': {''Ref'': ''TagsAppVersion''}},
@@ -15,9 +17,13 @@ description: 'AWS::ElasticLoadBalancingV2::TargetGroup property [Tags] should ex
   ''Value'': {''Ref'': ''TagsLoggingBucket''}}, {''Key'': ''owner_email'', ''Value'':
   {''Ref'': ''TagsOwnerEmail''}}] ] '
 filters:
-- {key: Tags, op: not-equal, type: elasticloadbalancingv2, value: 'type:exists'}
+- key: Tags
+  op: not-equal
+  type: elasticloadbalancingv2
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSElasticLoadBalancingV2TargetGroupTagsRule

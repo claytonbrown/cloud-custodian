@@ -3,14 +3,20 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::CodeBuild::Project property [EncryptionKey] should exist, consider
   default values of [ {''Ref'': ''KmsKeyId''} ] '
 filters:
-- {key: EncryptionKey, op: not-equal, type: codebuild, value: 'type:exists'}
+- key: EncryptionKey
+  op: not-equal
+  type: codebuild
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSCodeBuildProjectEncryptionKeyRule

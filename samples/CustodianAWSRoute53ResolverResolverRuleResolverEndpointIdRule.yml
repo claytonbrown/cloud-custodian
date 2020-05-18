@@ -1,0 +1,23 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
+  type: notify
+description: 'AWS::Route53Resolver::ResolverRule property [ResolverEndpointId] should
+  exist, consider default values of [ {''Ref'': ''TODO''} ] '
+filters:
+- key: ResolverEndpointId
+  op: not-equal
+  type: route53resolver
+  value: type:exists
+mode:
+  events:
+  - RunInstances
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSRoute53ResolverResolverRuleResolverEndpointIdRule
+resource: aws.route53resolver

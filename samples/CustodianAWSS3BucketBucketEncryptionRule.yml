@@ -3,15 +3,21 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::S3::Bucket property [BucketEncryption] should exist, consider default
   values of [ {''ServerSideEncryptionConfiguration'': {''KMSMasterKeyID'': {''Ref'':
   ''KmsKeyId''}, ''SSEAlgorithm'': ''aws:kms''}} ] '
 filters:
-- {key: BucketEncryption, op: not-equal, type: s3, value: 'type:exists'}
+- key: BucketEncryption
+  op: not-equal
+  type: s3
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSS3BucketBucketEncryptionRule

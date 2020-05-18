@@ -6,7 +6,7 @@ actions:
   transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
   type: notify
 description: 'AWS::GuardDuty::Detector property [Enable] should exist, consider default
-  values of [ True ] '
+  values of [ true ] '
 filters:
 - {key: Enable, op: not-equal, type: guardduty, value: 'type:exists'}
 mode:

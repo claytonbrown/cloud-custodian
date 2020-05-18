@@ -3,13 +3,19 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: AWS::RDS::DBInstance property [AvailabilityZone] should exist
 filters:
-- {key: AvailabilityZone, op: not-equal, type: rds, value: 'type:exists'}
+- key: AvailabilityZone
+  op: not-equal
+  type: rds
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSRDSDBInstanceAvailabilityZoneRule

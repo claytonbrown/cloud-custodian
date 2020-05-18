@@ -6,7 +6,7 @@ actions:
   transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
   type: notify
 description: 'AWS::SSM::PatchBaseline property [ApprovedPatchesEnableNonSecurity]
-  should exist, consider default values of [ False ] '
+  should exist, consider default values of [ true ] '
 filters:
 - {key: ApprovedPatchesEnableNonSecurity, op: not-equal, type: ssm, value: 'type:exists'}
 mode:

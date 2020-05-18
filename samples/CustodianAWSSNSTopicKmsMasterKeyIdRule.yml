@@ -3,14 +3,20 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::SNS::Topic property [KmsMasterKeyId] should exist, consider default
   values of [ {''Ref'': ''KmsKeyId''} ] '
 filters:
-- {key: KmsMasterKeyId, op: not-equal, type: sns, value: 'type:exists'}
+- key: KmsMasterKeyId
+  op: not-equal
+  type: sns
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSSNSTopicKmsMasterKeyIdRule

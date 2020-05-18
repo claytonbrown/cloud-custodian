@@ -1,0 +1,17 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: 'AWS::DocDB::DBCluster property [EnableCloudwatchLogsExports] should
+  exist, consider default values of [ true ] '
+filters:
+- {key: EnableCloudwatchLogsExports, op: not-equal, type: docdb, value: 'type:exists'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSDocDBDBClusterEnableCloudwatchLogsExportsRule
+resource: aws.docdb

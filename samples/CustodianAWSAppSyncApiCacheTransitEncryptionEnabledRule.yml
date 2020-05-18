@@ -1,0 +1,17 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  type: notify
+description: 'AWS::AppSync::ApiCache property [TransitEncryptionEnabled] should exist,
+  consider default values of [ true ] '
+filters:
+- {key: TransitEncryptionEnabled, op: not-equal, type: appsync, value: 'type:exists'}
+mode:
+  events: [RunInstances]
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSAppSyncApiCacheTransitEncryptionEnabledRule
+resource: aws.appsync

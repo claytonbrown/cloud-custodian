@@ -3,14 +3,20 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::OpsWorks::App property [EnableSsl] should exist, consider default
-  values of [ True ] '
+  values of [ true ] '
 filters:
-- {key: EnableSsl, op: not-equal, type: opsworks, value: 'type:exists'}
+- key: EnableSsl
+  op: not-equal
+  type: opsworks
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSOpsWorksAppEnableSslRule

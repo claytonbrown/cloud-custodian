@@ -6,7 +6,7 @@ actions:
   transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
   type: notify
 description: 'AWS::AppStream::Fleet property [EnableDefaultInternetAccess] should
-  exist, consider default values of [ False ] '
+  exist, consider default values of [ true ] '
 filters:
 - {key: EnableDefaultInternetAccess, op: not-equal, type: appstream, value: 'type:exists'}
 mode:

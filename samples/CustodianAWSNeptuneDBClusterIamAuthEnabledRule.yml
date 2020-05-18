@@ -6,7 +6,7 @@ actions:
   transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
   type: notify
 description: 'AWS::Neptune::DBCluster property [IamAuthEnabled] should exist, consider
-  default values of [ True ] '
+  default values of [ true ] '
 filters:
 - {key: IamAuthEnabled, op: not-equal, type: neptune, value: 'type:exists'}
 mode:

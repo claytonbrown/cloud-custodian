@@ -1,0 +1,23 @@
+actions:
+- priority_header: '2'
+  subject: c7n notifcation
+  template: default
+  to: todo@todo.com
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
+  type: notify
+description: 'AWS::IoT::Certificate property [CertificateSigningRequest] should exist,
+  consider default values of [ {''Ref'': ''TODO''} ] '
+filters:
+- key: CertificateSigningRequest
+  op: not-equal
+  type: iot
+  value: type:exists
+mode:
+  events:
+  - RunInstances
+  role: CloudCustodian
+  type: cloudtrail
+name: CustomAWSIoTCertificateCertificateSigningRequestRule
+resource: aws.iot

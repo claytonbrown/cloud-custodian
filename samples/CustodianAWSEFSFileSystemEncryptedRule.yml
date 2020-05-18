@@ -3,14 +3,20 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::EFS::FileSystem property [Encrypted] should exist, consider default
   values of [ True ] '
 filters:
-- {key: Encrypted, op: not-equal, type: efs, value: 'type:exists'}
+- key: Encrypted
+  op: not-equal
+  type: efs
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSEFSFileSystemEncryptedRule

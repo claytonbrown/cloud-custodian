@@ -3,14 +3,20 @@ actions:
   subject: c7n notifcation
   template: default
   to: todo@todo.com
-  transport: {queue: 'https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo', type: sqs}
+  transport:
+    queue: https://sqs.us-east-1.amazonaws.com/1234567890/c7n-todo
+    type: sqs
   type: notify
 description: 'AWS::RDS::DBInstance property [EnablePerformanceInsights] should exist,
-  consider default values of [ True ] '
+  consider default values of [ true ] '
 filters:
-- {key: EnablePerformanceInsights, op: not-equal, type: rds, value: 'type:exists'}
+- key: EnablePerformanceInsights
+  op: not-equal
+  type: rds
+  value: type:exists
 mode:
-  events: [RunInstances]
+  events:
+  - RunInstances
   role: CloudCustodian
   type: cloudtrail
 name: CustomAWSRDSDBInstanceEnablePerformanceInsightsRule
